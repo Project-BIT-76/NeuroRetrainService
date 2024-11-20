@@ -2,6 +2,7 @@ package project.bit.bit.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -43,13 +44,18 @@ public class ModelController {
     public ResponseEntity<?> getModel(@PathVariable String modelId) {
         try {
             log.info("Retrieving model: {}", modelId);
-            byte[] modelFile = modelTrainingService.getModel(modelId);
+
+            byte[] zipBytes = modelTrainingService.getModel(modelId);
+
             return ResponseEntity.ok()
-                    .header("Content-Disposition", "attachment; filename=model.h5")
-                    .body(modelFile);
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + modelId + ".zip")
+                    .body(zipBytes);
         } catch (ModelTrainingException e) {
             log.error("Failed to retrieve model: {}", modelId, e);
             return ResponseEntity.notFound().build();
+        } catch (Exception e) {
+            log.error("Unexpected error occurred", e);
+            return ResponseEntity.status(500).build();
         }
     }
 }
