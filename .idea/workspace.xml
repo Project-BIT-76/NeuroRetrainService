@@ -4,19 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a3d112eb-bfa7-4481-b46b-0b1eea56bb45" name="Changes" comment="prototype project">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+    <list default="true" id="a3d112eb-bfa7-4481-b46b-0b1eea56bb45" name="Changes" comment="remake script for requirements AI files  company">
+      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/139fe088-bd17-42a6-b5e3-60eddfe6947a/model.h5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/139fe088-bd17-42a6-b5e3-60eddfe6947a/previous_model.h5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/a8a3fe8c-6060-4c84-a21e-c8167fd774d2/model.h5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/c15c8df3-b039-4616-b759-d6e0dec0a854/model.h5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/project/bit/bit/controller/ModelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/bit/bit/controller/ModelController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/project/bit/bit/service/DockerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/bit/bit/service/DockerService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/project/bit/bit/service/FileStorageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/bit/bit/service/FileStorageService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/project/bit/bit/service/ModelTrainingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/bit/bit/service/ModelTrainingService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -180,7 +170,8 @@
       <workItem from="1731955482061" duration="4170000" />
       <workItem from="1731959681633" duration="25000" />
       <workItem from="1732027564333" duration="588000" />
-      <workItem from="1732087133665" duration="6433000" />
+      <workItem from="1732087133665" duration="6864000" />
+      <workItem from="1732107940645" duration="824000" />
     </task>
     <task id="LOCAL-00001" summary="Create start project">
       <option name="closed" value="true" />
@@ -198,7 +189,15 @@
       <option name="project" value="LOCAL" />
       <updated>1730881974231</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="remake script for requirements AI files  company">
+      <option name="closed" value="true" />
+      <created>1732107605675</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1732107605675</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -219,6 +218,7 @@
     <MESSAGE value="Create start project" />
     <MESSAGE value="update start project" />
     <MESSAGE value="prototype project" />
-    <option name="LAST_COMMIT_MESSAGE" value="prototype project" />
+    <MESSAGE value="remake script for requirements AI files  company" />
+    <option name="LAST_COMMIT_MESSAGE" value="remake script for requirements AI files  company" />
   </component>
 </project>
