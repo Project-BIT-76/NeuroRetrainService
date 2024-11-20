@@ -61,7 +61,6 @@ public class FileStorageService {
             Path target = Paths.get(modelsDir, newModelId, "previous_model.h5");
             Files.copy(source, target);
 
-            // Set file permissions to 666
             Files.setPosixFilePermissions(target,
                     PosixFilePermissions.fromString("rw-rw-rw-"));
 

@@ -18,10 +18,13 @@ services:
     image: tensorflow/tensorflow:latest
     volumes:
       - ./models:/models:rw
-      - ./data:/data:rw
+      - ./data:/tf/data/peak_hours/csv:rw
+      - ./work_data:/work_data:rw
     command: >
       /bin/bash -c "
         pip install --no-cache-dir --user pandas numpy scikit-learn &&
+        mkdir -p /tf/data/peak_hours/csv &&
+        chmod -R 777 /tf/data &&
         tail -f /dev/null
       "
     environment:

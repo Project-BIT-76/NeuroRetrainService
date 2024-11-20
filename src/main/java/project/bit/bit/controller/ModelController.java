@@ -17,14 +17,21 @@ public class ModelController {
 
     @PostMapping("/train")
     public ResponseEntity<?> trainModel(
-            @RequestParam("trainingData") MultipartFile trainingData,
+            @RequestParam("train_holiday") MultipartFile trainHoliday,
+            @RequestParam("train_pphour") MultipartFile trainPphour,
+            @RequestParam("train_x") MultipartFile trainX,
+            @RequestParam("train_y_cl") MultipartFile trainYCl,
             @RequestParam(value = "previousModel", required = false) String previousModelId) {
         try {
-            log.info("Received training request with data file: {}, previous model: {}",
-                    trainingData.getOriginalFilename(),
+            log.info("Received training request with files: holiday={}, pphour={}, x={}, y_cl={}, previous model: {}",
+                    trainHoliday.getOriginalFilename(),
+                    trainPphour.getOriginalFilename(),
+                    trainX.getOriginalFilename(),
+                    trainYCl.getOriginalFilename(),
                     previousModelId);
 
-            String modelId = modelTrainingService.trainModel(trainingData, previousModelId);
+            String modelId = modelTrainingService.trainModel(
+                    trainHoliday, trainPphour, trainX, trainYCl, previousModelId);
             return ResponseEntity.ok().body(modelId);
         } catch (ModelTrainingException e) {
             log.error("Training failed", e);

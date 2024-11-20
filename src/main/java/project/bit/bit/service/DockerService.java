@@ -18,19 +18,19 @@ public class DockerService {
     private static final String TENSORFLOW_CONTAINER = "tensorflow";
     private final DockerClient dockerClient;
 
-    public void executeTraining(String modelId, String pythonFilePath, String dataFilePath) {
+    public void executeTraining(String modelId, String pythonFilePath, String modelDir) {
         try {
-            log.info("Starting training for model: {} with python file: {} and data file: {}",
-                    modelId, pythonFilePath, dataFilePath);
+            log.info("Starting training for model: {} with python file: {} in directory: {}",
+                    modelId, pythonFilePath, modelDir);
 
-            String containerDataPath = dataFilePath.replace("/app/data", "/data");
-            String containerModelPath = "/models/" + modelId + "/model.h5";
+            String containerModelDir = "/tf/data/peak_hours/csv/" + modelId;
+            String containerOutputPath = "/models/" + modelId;
 
             String[] command = {
                     "python",
                     pythonFilePath,
-                    "--data", containerDataPath,
-                    "--model", containerModelPath
+                    "--data", containerModelDir,
+                    "--model", containerOutputPath
             };
 
             ExecCreateCmdResponse execCreateCmdResponse = dockerClient.execCreateCmd(TENSORFLOW_CONTAINER)
