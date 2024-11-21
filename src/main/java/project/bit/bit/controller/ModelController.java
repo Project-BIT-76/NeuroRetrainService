@@ -9,6 +9,8 @@ import org.springframework.web.multipart.MultipartFile;
 import project.bit.bit.exception.ModelTrainingException;
 import project.bit.bit.service.ModelTrainingService;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api/models")
 @RequiredArgsConstructor
@@ -18,21 +20,16 @@ public class ModelController {
 
     @PostMapping("/train")
     public ResponseEntity<?> trainModel(
-            @RequestParam("train_holiday") MultipartFile trainHoliday,
-            @RequestParam("train_pphour") MultipartFile trainPphour,
-            @RequestParam("train_x") MultipartFile trainX,
-            @RequestParam("train_y_cl") MultipartFile trainYCl,
+            @RequestParam Map<String, MultipartFile> files,
             @RequestParam(value = "previousModel", required = false) String previousModelId) {
         try {
-            log.info("Received training request with files: holiday={}, pphour={}, x={}, y_cl={}, previous model: {}",
-                    trainHoliday.getOriginalFilename(),
-                    trainPphour.getOriginalFilename(),
-                    trainX.getOriginalFilename(),
-                    trainYCl.getOriginalFilename(),
-                    previousModelId);
+            log.info("Received training request with {} files, previous model: {}",
+                    files.size(), previousModelId);
 
-            String modelId = modelTrainingService.trainModel(
-                    trainHoliday, trainPphour, trainX, trainYCl, previousModelId);
+            files.forEach((name, file) ->
+                    log.info("File: {} ({})", name, file.getOriginalFilename()));
+
+            String modelId = modelTrainingService.trainModel(files, previousModelId);
             return ResponseEntity.ok().body(modelId);
         } catch (ModelTrainingException e) {
             log.error("Training failed", e);

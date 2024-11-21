@@ -20,8 +20,7 @@ public class DockerService {
 
     public void executeTraining(String modelId, String pythonFilePath, String modelDir) {
         try {
-            log.info("Starting training for model: {} with python file: {} in directory: {}",
-                    modelId, pythonFilePath, modelDir);
+            log.info("Starting training for model: {} with python file: {} in directory: {}", modelId, pythonFilePath, modelDir);
 
             String containerModelDir = "/tf/data/peak_hours/csv/" + modelId;
             String containerOutputPath = "/models/" + modelId;
