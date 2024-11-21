@@ -4,10 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a3d112eb-bfa7-4481-b46b-0b1eea56bb45" name="Changes" comment="remake script for requirements AI files  company">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="a3d112eb-bfa7-4481-b46b-0b1eea56bb45" name="Changes" comment="updated">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/project/bit/bit/config/DockerConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/bit/bit/config/DockerConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/project/bit/bit/controller/ModelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/bit/bit/controller/ModelController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/project/bit/bit/service/DockerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/bit/bit/service/DockerService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/project/bit/bit/service/FileStorageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/bit/bit/service/FileStorageService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/project/bit/bit/service/ModelTrainingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/project/bit/bit/service/ModelTrainingService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,27 +66,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.BitApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Maven.neural-network-service [package].executor&quot;: &quot;Run&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;Spring Boot.BitApplication.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Никита/Desktop/ЯГТУ/5 семестр/Проект БИТ 2/NeuroRetrainService/data&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.BitApplication.executor": "Run",
+    "Maven.neural-network-service [package].executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Spring Boot.BitApplication.executor": "Run",
+    "git-widget-placeholder": "baksn",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/Никита/Desktop/ЯГТУ/5 семестр/Проект БИТ 2/NeuroRetrainService/data",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Никита\Desktop\ЯГТУ\5 семестр\Проект БИТ 2\NeuroRetrainService\data" />
@@ -198,7 +202,15 @@
       <option name="project" value="LOCAL" />
       <updated>1732107605675</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="updated">
+      <option name="closed" value="true" />
+      <created>1732213362725</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1732213362725</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -220,6 +232,7 @@
     <MESSAGE value="update start project" />
     <MESSAGE value="prototype project" />
     <MESSAGE value="remake script for requirements AI files  company" />
-    <option name="LAST_COMMIT_MESSAGE" value="remake script for requirements AI files  company" />
+    <MESSAGE value="updated" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated" />
   </component>
 </project>
