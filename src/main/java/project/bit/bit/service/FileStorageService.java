@@ -23,7 +23,7 @@ public class FileStorageService {
     @Value("${DATA_DIR:/app/data}")
     private String dataDir;
 
-    @Value("${allowed.file.extensions:csv,txt,json}")
+    @Value("${allowed.file.extensions:csv}")
     private List<String> allowedExtensions;
 
     public void createDirectories(String modelId) {
