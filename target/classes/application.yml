@@ -6,8 +6,8 @@ spring:
 
   datasource:
     url: jdbc:postgresql://localhost:5432/bit
-    username: ${bit}
-    password: ${ivan02082004}
+    username: ${postgres}
+    password: ${}
     driver-class-name: org.postgresql.Driver
   jpa:
     properties:
