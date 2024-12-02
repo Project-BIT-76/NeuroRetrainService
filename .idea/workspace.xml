@@ -4,23 +4,30 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a0f2bbee-3c3e-4619-b83e-88dba999be73" name="Changes" comment="create_startproject" />
+    <list default="true" id="a0f2bbee-3c3e-4619-b83e-88dba999be73" name="Changes" comment="Merge remote-tracking branch 'origin/siamocsgo' into siamocsgo&#10;&#10;# Conflicts:&#10;#&#9;src/main/java/project/bit/bit/repository/ModelRepository.java">
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="PUSH_AUTO_UPDATE" value="true" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="siamocsgo" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 8
-}]]></component>
+  <component name="JpbToolWindowState">
+    <option name="isToolWindowVisible" value="false" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
   <component name="ProjectId" id="2oD5IyB7GgWpyWFcC7KqI1ZqGCx" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -29,6 +36,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "siamocsgo",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/Users/siamo/IdeaProjects/NeuroRetrainService",
@@ -75,7 +83,47 @@
       <option name="project" value="LOCAL" />
       <updated>1730392271726</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary=" adding database and integration">
+      <option name="closed" value="true" />
+      <created>1733149782540</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1733149782540</updated>
+    </task>
+    <task id="LOCAL-00004" summary=" adding database and integration">
+      <option name="closed" value="true" />
+      <created>1733149815345</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1733149815345</updated>
+    </task>
+    <task id="LOCAL-00005" summary=" adding database and integration">
+      <option name="closed" value="true" />
+      <created>1733149884128</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1733149884128</updated>
+    </task>
+    <task id="LOCAL-00006" summary=" adding database and integration">
+      <option name="closed" value="true" />
+      <created>1733149936646</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1733149936647</updated>
+    </task>
+    <task id="LOCAL-00007" summary=" adding database and integration">
+      <option name="closed" value="true" />
+      <created>1733149989728</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1733149989728</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -94,6 +142,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="create_startproject" />
-    <option name="LAST_COMMIT_MESSAGE" value="create_startproject" />
+    <MESSAGE value=" adding database and integration" />
+    <MESSAGE value="Merge remote-tracking branch 'origin/siamocsgo' into siamocsgo&#10;&#10;# Conflicts:&#10;#&#9;src/main/java/project/bit/bit/repository/ModelRepository.java" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge remote-tracking branch 'origin/siamocsgo' into siamocsgo&#10;&#10;# Conflicts:&#10;#&#9;src/main/java/project/bit/bit/repository/ModelRepository.java" />
   </component>
 </project>
