@@ -6,16 +6,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import project.bit.bit.exception.ModelTrainingException;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.io.*;
+import java.nio.file.*;
 import java.nio.file.attribute.PosixFilePermissions;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
@@ -23,13 +17,13 @@ import java.util.zip.ZipOutputStream;
 @Service
 @Slf4j
 public class FileStorageService {
-    @Value("${storage.models-dir:/app/models}")
+    @Value("${MODELS_DIR:/app/models}")
     private String modelsDir;
 
-    @Value("${storage.data-dir:/app/data}")
+    @Value("${DATA_DIR:/app/data}")
     private String dataDir;
 
-    @Value("${storage.allowed-extensions:csv}")
+    @Value("${allowed.file.extensions:csv}")
     private List<String> allowedExtensions;
 
     public void createDirectories(String modelId) {
@@ -43,14 +37,9 @@ public class FileStorageService {
             setDirectoryPermissions(modelPath);
             setDirectoryPermissions(dataPath);
 
-            // Создаем пустой файл-маркер для обозначения, что директория модели существует
-            Path markerFile = modelPath.resolve(".model");
-            Files.createFile(markerFile);
-            setDirectoryPermissions(markerFile);
-
-            log.info("Созданы директории для модели {}: {} и {}", modelId, modelPath, dataPath);
+            log.info("Created directories for model {}: {} and {}", modelId, modelPath, dataPath);
         } catch (IOException e) {
-            throw new ModelTrainingException("Ошибка при создании директорий для модели: " + modelId, e);
+            throw new ModelTrainingException("Failed to create directories for model: " + modelId, e);
         }
     }
 
@@ -58,7 +47,7 @@ public class FileStorageService {
         try {
             Files.setPosixFilePermissions(path, PosixFilePermissions.fromString("rwxrwxrwx"));
         } catch (UnsupportedOperationException e) {
-            log.warn("POSIX права доступа не поддерживаются для пути: {}", path);
+            log.warn("POSIX file permissions not supported on this system for path: {}", path);
         }
     }
 
@@ -72,9 +61,9 @@ public class FileStorageService {
                 Path filePath = Paths.get(dataDir, modelId, filename);
                 saveFile(file, filePath);
                 savedPaths.put(paramName, filePath.toString());
-                log.info("Успешно сохранен файл: {} как {}", paramName, filePath);
+                log.info("Successfully saved file: {} as {}", paramName, filePath);
             } catch (IOException e) {
-                throw new ModelTrainingException("Ошибка при сохранении файла: " + paramName, e);
+                throw new ModelTrainingException("Failed to save file: " + paramName, e);
             }
         });
 
@@ -83,7 +72,7 @@ public class FileStorageService {
 
     private void validateFiles(Map<String, MultipartFile> files) {
         if (files == null || files.isEmpty()) {
-            throw new ModelTrainingException("Не предоставлены файлы для обучения");
+            throw new ModelTrainingException("No files provided for training");
         }
 
         List<String> invalidFiles = files.values().stream()
@@ -92,8 +81,8 @@ public class FileStorageService {
                 .collect(Collectors.toList());
 
         if (!invalidFiles.isEmpty()) {
-            throw new ModelTrainingException("Обнаружены недопустимые типы файлов: " + String.join(", ", invalidFiles) +
-                    ". Разрешенные расширения: " + String.join(", ", allowedExtensions));
+            throw new ModelTrainingException("Invalid file types detected: " + String.join(", ", invalidFiles) +
+                    ". Allowed extensions: " + String.join(", ", allowedExtensions));
         }
     }
 
@@ -116,12 +105,41 @@ public class FileStorageService {
     }
 
     private void saveFile(MultipartFile file, Path destination) throws IOException {
-        Files.createDirectories(destination.getParent());
         file.transferTo(destination);
         try {
             Files.setPosixFilePermissions(destination, PosixFilePermissions.fromString("rw-rw-rw-"));
         } catch (UnsupportedOperationException e) {
-            log.warn("POSIX права доступа не поддерживаются для файла: {}", destination);
+            log.warn("POSIX file permissions not supported for file: {}", destination);
+        }
+    }
+
+    public void copyPreviousModel(String previousModelId, String newModelId) {
+        Path source = Paths.get(modelsDir, previousModelId);
+        Path target = Paths.get(modelsDir, newModelId);
+
+        if (!Files.exists(source)) {
+            throw new ModelTrainingException("Previous model not found: " + previousModelId);
+        }
+
+        try {
+            Files.walk(source)
+                    .forEach(sourcePath -> copyModelFile(sourcePath, source, target));
+            log.info("Successfully copied previous model from {} to {}", source, target);
+        } catch (IOException e) {
+            throw new ModelTrainingException("Failed to copy previous model: " + previousModelId, e);
+        }
+    }
+
+    private void copyModelFile(Path sourcePath, Path sourceRoot, Path targetRoot) {
+        try {
+            Path targetPath = targetRoot.resolve(sourceRoot.relativize(sourcePath));
+            if (Files.isDirectory(sourcePath)) {
+                Files.createDirectories(targetPath);
+            } else {
+                Files.copy(sourcePath, targetPath, StandardCopyOption.REPLACE_EXISTING);
+            }
+        } catch (IOException e) {
+            throw new ModelTrainingException("Failed to copy file: " + sourcePath, e);
         }
     }
 
@@ -135,14 +153,16 @@ public class FileStorageService {
             Files.deleteIfExists(zipFile.toPath());
             return zipBytes;
         } catch (IOException e) {
-            throw new ModelTrainingException("Ошибка при получении модели: " + modelId, e);
+            throw new ModelTrainingException("Failed to retrieve model: " + modelId, e);
         }
     }
 
     private void validateModelDirectory(Path modelDir) {
-        Path markerFile = modelDir.resolve(".model");
-        if (!Files.exists(markerFile)) {
-            throw new ModelTrainingException("Директория модели не существует или не содержит обученную модель: " + modelDir);
+        if (!Files.exists(modelDir)) {
+            throw new ModelTrainingException("Model directory does not exist: " + modelDir);
+        }
+        if (!Files.isDirectory(modelDir)) {
+            throw new ModelTrainingException("Model path is not a directory: " + modelDir);
         }
     }
 
@@ -153,7 +173,6 @@ public class FileStorageService {
 
             Files.walk(sourceDirPath)
                     .filter(path -> !Files.isDirectory(path))
-                    .filter(path -> !path.getFileName().toString().equals(".model"))
                     .forEach(path -> addToZip(path, sourceDirPath, zos));
         }
         return zipFile;
@@ -166,7 +185,7 @@ public class FileStorageService {
             Files.copy(path, zos);
             zos.closeEntry();
         } catch (IOException e) {
-            throw new ModelTrainingException("Ошибка при добавлении файла в архив: " + path, e);
+            throw new ModelTrainingException("Failed to add file to zip: " + path, e);
         }
     }
 }

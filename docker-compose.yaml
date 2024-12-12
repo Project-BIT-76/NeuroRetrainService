@@ -1,8 +1,6 @@
-version: '3.8'
 services:
   app:
     build: .
-    container_name: app
     ports:
       - "8080:8080"
     volumes:
@@ -12,43 +10,24 @@ services:
     environment:
       - MODELS_DIR=/app/models
       - DATA_DIR=/app/data
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/bit
     depends_on:
       - tensorflow
-      - db
 
   tensorflow:
     container_name: tensorflow
-    image: armswdev/tensorflow-arm-neoverse
+    image: tensorflow/tensorflow:latest
     volumes:
       - ./models:/models:rw
       - ./data:/tf/data/peak_hours/csv:rw
       - ./work_data:/work_data:rw
     command: >
       /bin/bash -c "
-      pip install --no-cache-dir pandas numpy scikit-learn &&
-      mkdir -p /tf/data/peak_hours/csv &&
-      chmod -R 777 /tf/data &&
-      tail -f /dev/null
-
+        pip install --no-cache-dir --user pandas numpy scikit-learn &&
+        mkdir -p /tf/data/peak_hours/csv &&
+        chmod -R 777 /tf/data &&
+        tail -f /dev/null
       "
     environment:
       - PYTHONUNBUFFERED=1
       - PIP_NO_CACHE_DIR=1
     user: root
-
-  db:
-    image: postgres:latest
-    container_name: postgres1
-    environment:
-      POSTGRES_DB: bit
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: ivan02082004
-    ports:
-      - "5433:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-volumes:
-  postgres_data:
-
-
