@@ -7,9 +7,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import project.bit.bit.exception.ModelTrainingException;
+import project.bit.bit.model.Model;
+import project.bit.bit.repository.ModelRepository;
 import project.bit.bit.service.ModelTrainingService;
 
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/models")
@@ -17,6 +22,7 @@ import java.util.Map;
 @Slf4j
 public class ModelController {
     private final ModelTrainingService modelTrainingService;
+    private final ModelRepository modelRepository;
 
     @PostMapping("/train")
     public ResponseEntity<?> trainModel(
@@ -42,10 +48,16 @@ public class ModelController {
         try {
             log.info("Retrieving model: {}", modelId);
 
+            Optional<Model> modelOptional = modelRepository.findById(UUID.fromString(modelId));
+            if (modelOptional.isEmpty()) {
+                return ResponseEntity.notFound().build();
+            }
+
+            Model model = modelOptional.get();
             byte[] zipBytes = modelTrainingService.getModel(modelId);
 
             return ResponseEntity.ok()
-                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + modelId + ".zip")
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + model.getName() + ".zip")
                     .body(zipBytes);
         } catch (ModelTrainingException e) {
             log.error("Failed to retrieve model: {}", modelId, e);
@@ -55,4 +67,19 @@ public class ModelController {
             return ResponseEntity.status(500).build();
         }
     }
+    @GetMapping
+    public ResponseEntity<?> getAllModels() {
+        try {
+            List<Model> models = modelRepository.findAll();
+            if (models.isEmpty()) {
+                return ResponseEntity.noContent().build();
+            }
+
+            return ResponseEntity.ok(models);
+        } catch (Exception e) {
+            log.error("Failed to retrieve models", e);
+            return ResponseEntity.status(500).body("Failed to retrieve models");
+        }
+    }
+
 }

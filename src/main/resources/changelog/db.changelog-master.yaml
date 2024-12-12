@@ -1,0 +1,4 @@
+databaseChangeLog:
+
+  - include:
+      file: changelog/changes/08-01-changelog.yaml

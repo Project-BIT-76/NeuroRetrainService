@@ -1,5 +1,6 @@
 package project.bit.bit.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,7 @@ public class FileStorageService {
 
     @Value("${allowed.file.extensions:csv}")
     private List<String> allowedExtensions;
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     public void createDirectories(String modelId) {
         try {
@@ -186,6 +188,21 @@ public class FileStorageService {
             zos.closeEntry();
         } catch (IOException e) {
             throw new ModelTrainingException("Failed to add file to zip: " + path, e);
+        }
+    }
+    public String getModelJsonPath(String modelId, String jsonFileName) {
+        Path jsonPath = Paths.get(modelsDir, modelId, jsonFileName);
+        if (!Files.exists(jsonPath)) {
+            throw new ModelTrainingException("JSON file not found: " + jsonPath);
+        }
+        return jsonPath.toString();
+    }
+
+    public Map<String, Object> readJson(String jsonFilePath) {
+        try {
+            return objectMapper.readValue(new File(jsonFilePath), Map.class);
+        } catch (IOException e) {
+            throw new ModelTrainingException("Failed to read JSON file: " + jsonFilePath, e);
         }
     }
 }
